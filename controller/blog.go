@@ -2,9 +2,9 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/makki0205/blog/model"
+	"github.com/hiprice/blog/model"
 	_ "fmt"
-	"github.com/makki0205/blog/httputil"
+	"github.com/hiprice/blog/httputil"
 )
 
 type Blog struct {

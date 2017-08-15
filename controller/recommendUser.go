@@ -4,8 +4,8 @@ package controller
 import (
 	_ "fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/makki0205/blog/httputil"
-	"github.com/makki0205/blog/model"
+	"github.com/hiprice/blog/httputil"
+	"github.com/hiprice/blog/model"
 )
 
 type RecommendUser struct {

@@ -3,7 +3,7 @@ package middleware
 import (
 	"time"
 	"github.com/gin-gonic/gin"
-	"github.com/makki0205/blog/model"
+	"github.com/hiprice/blog/model"
 )
 
 var AuthMiddleware = GinJWTMiddleware{

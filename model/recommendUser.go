@@ -2,7 +2,7 @@ package model
 
 import (
 	"github.com/go-xorm/xorm"
-	db "github.com/makki0205/blog/helper/db"
+	db "github.com/hiprice/blog/helper/db"
 	"time"
 )
 

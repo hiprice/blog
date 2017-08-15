@@ -1,4 +1,4 @@
-package: github.com/makki0205/blog
+package: github.com/hiprice/blog
 import:
 - package: github.com/gin-gonic/gin
 - package: github.com/go-sql-driver/mysql

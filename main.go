@@ -3,10 +3,10 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/itsjamie/gin-cors"
-	"github.com/makki0205/blog/controller"
-	"github.com/makki0205/blog/env"
-	db "github.com/makki0205/blog/helper/db"
-	"github.com/makki0205/blog/middleware"
+	"github.com/hiprice/blog/controller"
+	"github.com/hiprice/blog/env"
+	db "github.com/hiprice/blog/helper/db"
+	"github.com/hiprice/blog/middleware"
 	"gopkg.in/mgo.v2"
 )
 
