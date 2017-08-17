@@ -2,7 +2,6 @@ package model
 
 import (
 	"github.com/go-xorm/xorm"
-	db "github.com/hiprice/blog/helper/db"
 	"time"
 )
 
@@ -25,14 +24,4 @@ func NewRecommendUserRepository() RecommendUserRepository {
 func (self RecommendUserRepository) Create(recommendUser RecommendUser) (int64, error) {
 	return self.engine.Insert(recommendUser)
 
-}
-
-//SaveToDB s
-func (u *User) SaveToDB() error {
-	err := db.UsersCollection.Insert(&u)
-
-	if err != nil {
-		return err
-	}
-	return nil
 }

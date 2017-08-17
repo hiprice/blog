@@ -1,7 +1,6 @@
 package model
 
 import (
-	//db "../helper/db"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
 	"github.com/pkg/errors"
@@ -63,5 +62,3 @@ func (self UserRepository) GetUserId(c *gin.Context) int {
 	userId := self.getUserId(username_string)
 	return userId
 }
-
-//SaveToDB s

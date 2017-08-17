@@ -5,6 +5,6 @@ import (
 )
 
 var (
-	MongoSession    *mgo.Session
-	UsersCollection *mgo.Collection
+	MongoSession       *mgo.Session
+	UserInfoCollection *mgo.Collection
 )

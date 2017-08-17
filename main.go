@@ -2,11 +2,11 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/itsjamie/gin-cors"
 	"github.com/hiprice/blog/controller"
 	"github.com/hiprice/blog/env"
 	db "github.com/hiprice/blog/helper/db"
 	"github.com/hiprice/blog/middleware"
+	"github.com/itsjamie/gin-cors"
 	"gopkg.in/mgo.v2"
 )
 
@@ -25,7 +25,7 @@ func init() {
 
 	mongoSession.SetMode(mgo.Monotonic, true)
 	db.MongoSession = mongoSession
-	db.UsersCollection = db.MongoSession.DB(DATABASENAME).C(DATABASECOLLECTION)
+	db.UserInfoCollection = db.MongoSession.DB(DATABASENAME).C(DATABASECOLLECTION)
 }
 
 func main() {
