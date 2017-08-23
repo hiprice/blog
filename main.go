@@ -13,8 +13,8 @@ import (
 const (
 	APISERVER          = ":3001"
 	DATABASESERVER     = "localhost:27017"
-	DATABASENAME       = ""
-	DATABASECOLLECTION = ""
+	DATABASENAME       = "aa"
+	DATABASECOLLECTION = "bb"
 )
 
 func init() {
@@ -53,6 +53,12 @@ func main() {
 	blog.POST("/blog", bctr.Create)
 	blog.PUT("/blog/:id", bctr.Update)
 	blog.DELETE("/blog", bctr.Delete)
+
+	userapi := r.Group("/api")
+	userapi.Use(middleware.AuthMiddleware.MiddlewareFunc("user"))
+	uictr := controller.NewUserInfo()
+	userapi.POST("/user", uictr.SaveUserInfo)
+	userapi.GET("/user", uictr.GetUserInfoByID)
 
 	r.Run(APISERVER)
 }
