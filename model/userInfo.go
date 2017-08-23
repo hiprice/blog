@@ -1,8 +1,12 @@
 package model
 
 import (
-	db "github.com/hiprice/blog/helper/db"
 	"gopkg.in/mgo.v2/bson"
+)
+
+const (
+	// CollectionArticle holds the name of the articles collection
+	CollectionUserInfo = "userInfos"
 )
 
 type UserInfo struct {
@@ -14,38 +18,4 @@ type UserInfo struct {
 	Occupation string        `json:"occupation,omitempty" bson:"occupation,omitempty"`
 	Birthday   string        `json:"birthday,omitempty" bson:"image,omitempty"`
 	Detail     string        `json:"detail,omitempty" bson:"detail,omitempty"`
-}
-
-// NewUser ...
-func NewUserInfo() UserInfo {
-	return UserInfo{}
-}
-
-//SaveToDB s
-func (self *UserInfo) SaveUserInfo() error {
-	err := db.UserInfoCollection.Insert(&self)
-
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-//ReadFromDB r
-func (u *UserInfo) ReadFromDB() ([]UserInfo, error) {
-	result := []UserInfo{}
-	err := db.UserInfoCollection.Find(nil).All(&result)
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-//ReadByID only one
-func (u *UserInfo) ReadByID() (*UserInfo, error) {
-	err := db.UserInfoCollection.Find(bson.M{"userId": u.UserId}).One(&u)
-	if err != nil {
-		return nil, err
-	}
-	return u, nil
 }

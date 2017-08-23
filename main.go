@@ -7,44 +7,37 @@ import (
 	db "github.com/hiprice/blog/helper/db"
 	"github.com/hiprice/blog/middleware"
 	"github.com/itsjamie/gin-cors"
-	"gopkg.in/mgo.v2"
 )
 
 const (
-	APISERVER          = ":3001"
-	DATABASESERVER     = "localhost:27017"
-	DATABASENAME       = "aa"
-	DATABASECOLLECTION = "bb"
+	APISERVER = ":3001"
 )
 
 func init() {
-	mongoSession, err := mgo.Dial(DATABASESERVER)
-	if err != nil {
-		panic(err)
-	}
-
-	mongoSession.SetMode(mgo.Monotonic, true)
-	db.MongoSession = mongoSession
-	db.UserInfoCollection = db.MongoSession.DB(DATABASENAME).C(DATABASECOLLECTION)
+	db.Connect()
 }
 
 func main() {
-	defer db.MongoSession.Close()
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
+	router := gin.Default()
+
+	// Middlewares
+	router.Use(middleware.Connect)
+	router.Use(middleware.ErrorHandler)
+
+	router.GET("/", func(c *gin.Context) {
 		c.String(200, "yes")
 	})
 
-	r.Use(cors.Middleware(env.CorsConfig))
-	r.Use(gin.Logger())
+	router.Use(cors.Middleware(env.CorsConfig))
+	router.Use(gin.Logger())
 
-	user := r.Group("/api")
+	user := router.Group("/api")
 
 	uctr := controller.NewUser()
 	user.POST("/signup", uctr.SignUp)
 	user.POST("/signin", middleware.AuthMiddleware.LoginHandler)
 
-	blog := r.Group("/api")
+	blog := router.Group("/api")
 	blog.Use(middleware.AuthMiddleware.MiddlewareFunc("user"))
 
 	bctr := controller.NewBlog()
@@ -54,11 +47,11 @@ func main() {
 	blog.PUT("/blog/:id", bctr.Update)
 	blog.DELETE("/blog", bctr.Delete)
 
-	userapi := r.Group("/api")
+	userapi := router.Group("/api")
 	userapi.Use(middleware.AuthMiddleware.MiddlewareFunc("user"))
 	uictr := controller.NewUserInfo()
 	userapi.POST("/user", uictr.SaveUserInfo)
-	userapi.GET("/user", uictr.GetUserInfoByID)
+	//userapi.GET("/user", uictr.GetUserInfoByID)
 
-	r.Run(APISERVER)
+	router.Run(APISERVER)
 }
